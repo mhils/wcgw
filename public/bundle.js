@@ -820,6 +820,16 @@ var ScoreBoard = (function (_React$Component2) {
     _createClass(ScoreBoard, [{
         key: "render",
         value: function render() {
+            console.log("Userinformation ", this.props.users);
+            this.props.users.sort(function (a, b) {
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
             var userNodes = this.props.users.map(function (user) {
                 return _react2["default"].createElement(User, _extends({ key: user.id }, user));
             });
