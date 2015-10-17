@@ -18,15 +18,15 @@
   },
   "homepage": "https://github.com/mhils/wcgw#readme",
   "dependencies": {
-    "express": "^4.13.3",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "express": "^4.13.3"
   },
   "devDependencies": {
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "concurrently": "^0.1.1",
     "nodemon": "^1.7.1",
-    "watchify": "^3.4.0"
+    "watchify": "^3.4.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   }
 }
