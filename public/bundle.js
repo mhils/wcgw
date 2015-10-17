@@ -1,7 +1,14 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports={
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = {
   "domain": "whatcouldgowrong.party"
-}
+};
+module.exports = exports["default"];
+
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", {
@@ -12,11 +19,15 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
 
 var JoinGame = (function (_React$Component) {
     _inherits(JoinGame, _React$Component);
@@ -43,11 +54,11 @@ var JoinGame = (function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 null,
-                React.createElement("input", { type: "text", value: this.state.name, onChange: this.handleChange.bind(this) }),
-                React.createElement(
+                _react2["default"].createElement("input", { type: "text", value: this.state.name, onChange: this.handleChange.bind(this) }),
+                _react2["default"].createElement(
                     "button",
                     { onClick: this.joinGame.bind(this) },
                     "Join Game"
@@ -57,7 +68,7 @@ var JoinGame = (function (_React$Component) {
     }]);
 
     return JoinGame;
-})(React.Component);
+})(_react2["default"].Component);
 
 exports["default"] = JoinGame;
 module.exports = exports["default"];
@@ -72,11 +83,15 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
 
 var LandingPage = (function (_React$Component) {
     _inherits(LandingPage, _React$Component);
@@ -95,15 +110,15 @@ var LandingPage = (function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 null,
-                React.createElement(
+                _react2["default"].createElement(
                     "h1",
                     null,
                     "What Could Go Wrong?"
                 ),
-                React.createElement(
+                _react2["default"].createElement(
                     "button",
                     { onClick: this.hostGame.bind(this) },
                     "Host Game"
@@ -113,7 +128,7 @@ var LandingPage = (function (_React$Component) {
     }]);
 
     return LandingPage;
-})(React.Component);
+})(_react2["default"].Component);
 
 exports["default"] = LandingPage;
 module.exports = exports["default"];
@@ -121,19 +136,27 @@ module.exports = exports["default"];
 },{"react":165}],4:[function(require,module,exports){
 "use strict";
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _scoreboardJs = require("./scoreboard.js");
+var _react = require("react");
 
-var _scoreboardJs2 = _interopRequireDefault(_scoreboardJs);
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require("react-dom");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _configJs = require("./config.js");
+
+var _configJs2 = _interopRequireDefault(_configJs);
 
 var _playJs = require("./play.js");
 
@@ -155,10 +178,6 @@ var _landingpageJs = require("./landingpage.js");
 
 var _landingpageJs2 = _interopRequireDefault(_landingpageJs);
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var config = require("./config.json");
-
 var State = {
     OBSERVE: "observe",
     START_SCREEN: "start_screen",
@@ -175,7 +194,7 @@ var App = (function (_React$Component) {
 
         _classCallCheck(this, App);
 
-        _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
+        _get(Object.getPrototypeOf(App.prototype), "constructor", this).call(this, props);
 
         var socket = io();
 
@@ -196,7 +215,7 @@ var App = (function (_React$Component) {
     }
 
     _createClass(App, [{
-        key: 'startGame',
+        key: "startGame",
         value: function startGame() {
             this.state.socket.emit("start game");
             this.setState({
@@ -204,7 +223,7 @@ var App = (function (_React$Component) {
             });
         }
     }, {
-        key: 'hostGame',
+        key: "hostGame",
         value: function hostGame() {
             this.state.socket.emit("host game");
             this.setState({
@@ -212,31 +231,31 @@ var App = (function (_React$Component) {
             });
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             switch (this.state.state) {
                 case State.HOST_GAME:
-                    return React.createElement(_startJs2['default'], { game: this.state.game, startGame: this.startGame.bind(this) });
+                    return _react2["default"].createElement(_startJs2["default"], { game: this.state.game, startGame: this.startGame.bind(this) });
                 case State.JOIN:
-                    return React.createElement(_joinJs2['default'], null);
+                    return _react2["default"].createElement(_joinJs2["default"], null);
                 case State.OBSERVE:
-                    return React.createElement(_observeJs2['default'], { game: this.state.game });
+                    return _react2["default"].createElement(_observeJs2["default"], { game: this.state.game });
                 case State.PLAY:
-                    return React.createElement(_playJs2['default'], null);
+                    return _react2["default"].createElement(_playJs2["default"], null);
                 default:
-                    return React.createElement(_landingpageJs2['default'], { hostGame: this.hostGame.bind(this) });
+                    return _react2["default"].createElement(_landingpageJs2["default"], { hostGame: this.hostGame.bind(this) });
             }
         }
     }]);
 
     return App;
-})(React.Component);
+})(_react2["default"].Component);
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    ReactDOM.render(React.createElement(App, null), document.getElementById("app"));
+    _reactDom2["default"].render(_react2["default"].createElement(App, null), document.getElementById("app"));
 });
 
-},{"./config.json":1,"./join.js":2,"./landingpage.js":3,"./observe.js":5,"./play.js":6,"./scoreboard.js":7,"./start.js":8,"react":165,"react-dom":10}],5:[function(require,module,exports){
+},{"./config.js":1,"./join.js":2,"./landingpage.js":3,"./observe.js":5,"./play.js":6,"./start.js":8,"react":165,"react-dom":10}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -252,11 +271,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
 var _scoreboardJs = require("./scoreboard.js");
 
 var _scoreboardJs2 = _interopRequireDefault(_scoreboardJs);
-
-var React = require('react');
 
 var ObserveGame = (function (_React$Component) {
     _inherits(ObserveGame, _React$Component);
@@ -271,17 +292,17 @@ var ObserveGame = (function (_React$Component) {
         key: "render",
         value: function render() {
 
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 null,
                 "such gif",
-                React.createElement(_scoreboardJs2["default"], { users: this.props.game.users })
+                _react2["default"].createElement(_scoreboardJs2["default"], { users: this.props.game.users })
             );
         }
     }]);
 
     return ObserveGame;
-})(React.Component);
+})(_react2["default"].Component);
 
 exports["default"] = ObserveGame;
 module.exports = exports["default"];
@@ -296,11 +317,15 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
 
 var PlayGame = (function (_React$Component) {
     _inherits(PlayGame, _React$Component);
@@ -319,25 +344,25 @@ var PlayGame = (function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 null,
-                React.createElement(
+                _react2["default"].createElement(
                     "button",
                     { onClick: this.onAnswerButton.bind(this, "a") },
                     "A"
                 ),
-                React.createElement(
+                _react2["default"].createElement(
                     "button",
                     { onClick: this.onAnswerButton.bind(this, "b") },
                     "B"
                 ),
-                React.createElement(
+                _react2["default"].createElement(
                     "button",
                     { onClick: this.onAnswerButton.bind(this, "c") },
                     "C"
                 ),
-                React.createElement(
+                _react2["default"].createElement(
                     "button",
                     { onClick: this.onAnswerButton.bind(this, "d") },
                     "D"
@@ -347,7 +372,7 @@ var PlayGame = (function (_React$Component) {
     }]);
 
     return PlayGame;
-})(React.Component);
+})(_react2["default"].Component);
 
 exports["default"] = PlayGame;
 module.exports = exports["default"];
@@ -362,11 +387,15 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
 
 var User = (function (_React$Component) {
     _inherits(User, _React$Component);
@@ -380,7 +409,7 @@ var User = (function (_React$Component) {
     _createClass(User, [{
         key: "render",
         value: function render() {
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 null,
                 this.props.name,
@@ -392,7 +421,7 @@ var User = (function (_React$Component) {
     }]);
 
     return User;
-})(React.Component);
+})(_react2["default"].Component);
 
 exports.User = User;
 
@@ -409,10 +438,10 @@ var UserList = (function (_React$Component2) {
         key: "render",
         value: function render() {
             var userNodes = this.props.users.map(function (user) {
-                return React.createElement(User, user);
+                return _react2["default"].createElement(User, user);
             });
 
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 null,
                 "Users: ",
@@ -422,7 +451,7 @@ var UserList = (function (_React$Component2) {
     }]);
 
     return UserList;
-})(React.Component);
+})(_react2["default"].Component);
 
 exports["default"] = UserList;
 
@@ -442,12 +471,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _configJs = require("./config.js");
+
+var _configJs2 = _interopRequireDefault(_configJs);
+
 var _scoreboardJs = require("./scoreboard.js");
 
 var _scoreboardJs2 = _interopRequireDefault(_scoreboardJs);
-
-var React = require('react');
-var config = require("./config.json");
 
 var StartGame = (function (_React$Component) {
     _inherits(StartGame, _React$Component);
@@ -462,44 +496,44 @@ var StartGame = (function (_React$Component) {
         key: "render",
         value: function render() {
             if (!this.props.game) {
-                return React.createElement(
+                return _react2["default"].createElement(
                     "div",
                     null,
                     "..."
                 );
             }
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 null,
-                React.createElement(
+                _react2["default"].createElement(
                     "h1",
                     null,
                     "show barcode"
                 ),
-                React.createElement(
+                _react2["default"].createElement(
                     "a",
                     { href: "/play/" + this.props.game.id },
-                    config.domain,
+                    _configJs2["default"].domain,
                     "/play/",
                     this.props.game.id
                 ),
-                React.createElement(
+                _react2["default"].createElement(
                     "button",
                     { onClick: this.props.startGame },
                     "Start Game"
                 ),
-                React.createElement(_scoreboardJs2["default"], { users: this.props.game.users })
+                _react2["default"].createElement(_scoreboardJs2["default"], { users: this.props.game.users })
             );
         }
     }]);
 
     return StartGame;
-})(React.Component);
+})(_react2["default"].Component);
 
 exports["default"] = StartGame;
 module.exports = exports["default"];
 
-},{"./config.json":1,"./scoreboard.js":7,"react":165}],9:[function(require,module,exports){
+},{"./config.js":1,"./scoreboard.js":7,"react":165}],9:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
