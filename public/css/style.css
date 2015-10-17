@@ -1,13 +1,13 @@
 html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: border-box;
 }
 
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 
 h1 {
-    font-family: 'Passion One';
+    font-family: 'Passion One', sans-serif;
 }
 
 html, body, #app {
@@ -16,12 +16,13 @@ html, body, #app {
 
 .play {
     height: 100%;
-    padding-top: 12px;
     text-align: center;
 }
 
 .play h1 {
     margin: 0;
+    height: 9%;
+    padding: 2.5%;
     box-shadow: 0 5px 5px #D2D2D2;
 }
 
@@ -34,8 +35,22 @@ html, body, #app {
     padding: 10%;
 }
 
+@keyframes pulse {
+    from {
+        font-size: 3em;
+    }
+    to {
+        font-size: 6em;
+    }
+}
+
+.play .fa-heart {
+    animation: pulse 0.3s alternate infinite;
+}
+
 .play .progress {
-    margin: 5px 0 10px;
+    margin: 4% 0 3%;
+    height: 3%;
     border-radius: 0;
 }
 

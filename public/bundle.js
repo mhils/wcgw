@@ -588,7 +588,7 @@ var PlayGame = (function (_React$Component) {
                         "p",
                         null,
                         game.users.length,
-                        " Players"
+                        " players"
                     );
                 }
                 contents = _react2["default"].createElement(
@@ -597,7 +597,7 @@ var PlayGame = (function (_React$Component) {
                     _react2["default"].createElement(
                         "p",
                         null,
-                        _react2["default"].createElement("i", { className: "fa fa-spinner fa-pulse fa-4x" })
+                        _react2["default"].createElement("i", { className: "fa fa-heart fa-4x text-danger" })
                     ),
                     _react2["default"].createElement(
                         "h4",

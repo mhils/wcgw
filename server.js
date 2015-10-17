@@ -148,12 +148,12 @@ function evaluate(game) {
     setTimeout(() => {
         correct.forEach((u) => u.score++);
         game.emitUpdate();
-    }, game.gif.answer.length);
+    }, game.gif.answers.length);
 
     // show answer
     game.setState(GameState.SHOW_ANSWER);
     if (!game.mode.isFinished(game)) {
-        setTimeout(() => showQuestion(game), game.gif.answer.length + 4 * 1000);
+        setTimeout(() => showQuestion(game), game.gif.answers.length + 4 * 1000);
     }
 }
 
@@ -214,6 +214,9 @@ io.on("connection", function (socket) {
     });
 
     socket.on("choose answer", function (choice, ack) {
+        if (socket.status !== State.PLAYING) {
+            return;
+        }
         socket.user.choice = choice;
         ack();
     });
