@@ -1,0 +1,19 @@
+[
+    {
+        "title": "GIF Title",
+        "question": {
+            "length": 1000,
+            "url": ""
+        },
+        "full": {
+            "length": 2000,
+            "url": ""
+        },
+        "answers": {
+            "This is right": true,
+            "such wong": false,
+            "even more wong": false,
+            "worst": false
+        }
+    }
+]

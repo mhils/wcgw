@@ -4,6 +4,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require("socket.io")(server);
 var port = process.env.PORT || 3000;
+var gifs = require("./lib/gifs.json");
 
 var gameCount = 0;
 function nextGameId() {
@@ -32,21 +33,55 @@ app.get('/game/:id', function (req, res) {
 // Game
 var games = {};
 
+class Mode {
+    isFinished(game) {
+    }
+
+    canJoin(game) {
+        // FIXME: unimplemented
+    }
+}
+
+class InfiniteMode extends Mode {
+    isFinished(game) {
+        return false;
+    }
+
+    canJoin(game) {
+        return true;
+    }
+}
+
+const GameState = {
+    LOBBY: "lobby",
+    SHOW_QUESTION: "show question",
+    SHOW_CHOICES: "show choices",
+    SHOW_ANSWER: "show answer"
+};
+
 class Game {
-    constructor() {
+    constructor(mode) {
         this.id = nextGameId();
-        this.started = false;
+        this.state = GameState.LOBBY;
         this.users = [];
         this.observers = [];
+        this.mode = mode;
+        this.gif = undefined;
+    }
+
+    setState(state){
+        this.state = state;
+        this.emitUpdate(state)
     }
 
     get all() {
         return this.users.map((u) => u.socket).concat(this.observers);
     }
 
-    emitUpdate(){
+
+    emitUpdate(eventName) {
         this.all.forEach((u) => {
-            u.emit("game update", this.toJSON());
+            u.emit(eventName || "game update", this.toJSON());
         });
     }
 
@@ -77,9 +112,30 @@ class User {
 const State = {
     IDLE: "idle",
     PLAYING: "playing",
-    OBSERVING: "observing",
-    HOSTING: "hosting"
+    OBSERVING: "observing"
 };
+
+function startGame(game) {
+    if (game.state === GameState.LOBBY) {
+        showQuestion(game);
+    }
+}
+function showQuestion(game) {
+    game.gif = gifs[Math.floor(Math.random() * gifs.length)];
+    game.setState(GameState.SHOW_QUESTION);
+    setTimeout(() => showChoices(game), game.gif.question.length);
+}
+function showChoices(game) {
+    game.setState(GameState.SHOW_CHOICES);
+    setTimeout(() => evaluate.bind(game), 20 * 1000);
+}
+function evaluate(game) {
+    game.users[0].score++;
+    game.setState(GameState.SHOW_ANSWER);
+    if (!game.isFinished()) {
+        setTimeout(() => showQuestion(game), game.gif.answer.length + 4 * 1000);
+    }
+}
 
 io.on("connection", function (socket) {
 
@@ -102,7 +158,7 @@ io.on("connection", function (socket) {
     }
 
     socket.on("host game", function () {
-        var game = new Game();
+        var game = new Game(new InfiniteMode());
         games[game.id] = game;
         observe(game.id);
     });
@@ -111,7 +167,7 @@ io.on("connection", function (socket) {
         if (socket.status !== State.OBSERVING) {
             throw new Error();
         }
-        //startGame();
+        startGame(socket.game);
     });
 
     socket.on("observe game", function (gameId) {
