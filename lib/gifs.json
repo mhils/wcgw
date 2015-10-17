@@ -34,5 +34,23 @@
       "worst"
     ],
     "solution": 1
+  },
+  {
+    "title": "ponies",
+    "question": {
+      "length": 4000,
+      "url": "/gifs/ponies_question.mp4"
+    },
+    "full": {
+      "length": 20000,
+      "url": "/gifs/ponies_full.mp4"
+    },
+    "answers": [
+      "This is right",
+      "such wong",
+      "even more wong",
+      "worst"
+    ],
+    "solution": 1
   }
 ]
