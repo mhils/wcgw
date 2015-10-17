@@ -51,7 +51,7 @@ var App = (function (_React$Component) {
             this.setState({
                 state: State.HOST_GAME
             });
-            window.setInterval(function () {
+            window.setTimeout(function () {
                 _this.setState({
                     gameId: 42,
                     users: [{ name: "James Bond", score: 3 }, { name: "Jamie Bond", score: 4 }]
@@ -63,7 +63,7 @@ var App = (function (_React$Component) {
         value: function render() {
             switch (this.state.state) {
                 case State.HOST_GAME:
-                    return React.createElement(StartGame, null);
+                    return React.createElement(StartGame, { gameId: this.state.gameId, users: this.state.users });
                 case State.JOIN:
                     return React.createElement(JoinGame, null);
                 default:
@@ -111,9 +111,20 @@ var StartGame = (function (_React$Component3) {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'h1',
+                'div',
                 null,
-                'show barcode'
+                React.createElement(
+                    'h1',
+                    null,
+                    'show barcode'
+                ),
+                React.createElement(
+                    'a',
+                    { href: "/play/" + this.props.gameId },
+                    'whatcouldgowrong.party/play/',
+                    this.props.gameId
+                ),
+                React.createElement(UserList, { users: this.props.users })
             );
         }
     }]);
@@ -121,8 +132,64 @@ var StartGame = (function (_React$Component3) {
     return StartGame;
 })(React.Component);
 
-var StartScreen = (function (_React$Component4) {
-    _inherits(StartScreen, _React$Component4);
+var User = (function (_React$Component4) {
+    _inherits(User, _React$Component4);
+
+    function User() {
+        _classCallCheck(this, User);
+
+        _get(Object.getPrototypeOf(User.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(User, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                '  ',
+                this.props.user.name,
+                ' (',
+                this.props.user.score,
+                ')'
+            );
+        }
+    }]);
+
+    return User;
+})(React.Component);
+
+var UserList = (function (_React$Component5) {
+    _inherits(UserList, _React$Component5);
+
+    function UserList() {
+        _classCallCheck(this, UserList);
+
+        _get(Object.getPrototypeOf(UserList.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(UserList, [{
+        key: 'render',
+        value: function render() {
+            var userNodes = this.props.users.map(function (user) {
+                return React.createElement(User, { user: user });
+            });
+
+            return React.createElement(
+                'div',
+                null,
+                ' ',
+                userNodes,
+                ' '
+            );
+        }
+    }]);
+
+    return UserList;
+})(React.Component);
+
+var StartScreen = (function (_React$Component6) {
+    _inherits(StartScreen, _React$Component6);
 
     function StartScreen() {
         _classCallCheck(this, StartScreen);
