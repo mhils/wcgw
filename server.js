@@ -102,6 +102,7 @@ class User {
         this.socket = socket;
         this.score = 0;
         this.id = Math.random();
+        this.choice = null;
     }
 
     toJSON() {
@@ -131,11 +132,22 @@ function showQuestion(game) {
     setTimeout(() => showChoices(game), game.gif.question.length);
 }
 function showChoices(game) {
+    game.users.forEach((u) => { u.choice = null; });
     game.setState(GameState.SHOW_CHOICES);
     setTimeout(() => evaluate(game), 5 * 1000);
 }
 function evaluate(game) {
-    game.users[0].score++;
+    // determine winners
+    var correct = game.users.filter((u) => {
+        return game.gif.answers[u.choice] === true;
+    });
+    // update scores
+    setTimeout(() => {
+        correct.forEach((u) => u.score++);
+        game.emitUpdate();
+    }, game.gif.full.length);
+
+    // show answer
     game.setState(GameState.SHOW_ANSWER);
     if (!game.mode.isFinished(game)) {
         setTimeout(() => showQuestion(game), game.gif.full.length + 4 * 1000);
@@ -147,7 +159,6 @@ io.on("connection", function (socket) {
     socket.status = State.IDLE;
 
     function observe(gameId) {
-
 
         // Game does not exist?
         if (!(gameId in games)) {
@@ -199,6 +210,11 @@ io.on("connection", function (socket) {
         socket.status = State.PLAYING;
     });
 
+    socket.on("choose answer", function (choice, ack) {
+        socket.user.choice = choice;
+        ack();
+    });
+
     socket.on('disconnect', function () {
         switch (socket.status) {
             case State.PLAYING:
@@ -216,8 +232,3 @@ io.on("connection", function (socket) {
     });
 
 });
-// FIXME DEBUG
-(function () {
-    var game = new Game();
-    games[game.id] = game;
-})();

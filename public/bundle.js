@@ -420,6 +420,11 @@ var App = (function (_React$Component) {
             });
         }
     }, {
+        key: "submitChoice",
+        value: function submitChoice(choice, cb) {
+            this.state.socket.emit("choose answer", choice, cb);
+        }
+    }, {
         key: "render",
         value: function render() {
             switch (this.state.state) {
@@ -430,7 +435,7 @@ var App = (function (_React$Component) {
                 case State.DISPLAY_GAME:
                     return _react2["default"].createElement(_displayJs2["default"], { game: this.state.game });
                 case State.PLAY:
-                    return _react2["default"].createElement(_playJs2["default"], { game: this.state.game });
+                    return _react2["default"].createElement(_playJs2["default"], { game: this.state.game, submitChoice: this.submitChoice.bind(this) });
                 default:
                     return _react2["default"].createElement(_landingpageJs2["default"], { hostGame: this.hostGame.bind(this) });
             }
@@ -469,16 +474,28 @@ var _gameJs = require("./game.js");
 var PlayGame = (function (_React$Component) {
     _inherits(PlayGame, _React$Component);
 
-    function PlayGame() {
+    function PlayGame(props) {
         _classCallCheck(this, PlayGame);
 
-        _get(Object.getPrototypeOf(PlayGame.prototype), "constructor", this).apply(this, arguments);
+        _get(Object.getPrototypeOf(PlayGame.prototype), "constructor", this).call(this, props);
+        this.state = { choice: null };
     }
 
     _createClass(PlayGame, [{
+        key: "componentWillReceiveProps",
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.game.state !== this.props.game.state) {
+                this.setState({ choice: null });
+            }
+        }
+    }, {
         key: "onAnswerButton",
         value: function onAnswerButton(choice) {
-            console.log(choice);
+            var _this = this;
+
+            this.submitChoice(choice, function () {
+                _this.setState({ choice: choice });
+            });
         }
     }, {
         key: "render",
