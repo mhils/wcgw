@@ -26,8 +26,9 @@
     "browserify": "^11.2.0",
     "concurrently": "^0.1.1",
     "nodemon": "^1.7.1",
-    "watchify": "^3.4.0",
+    "qrcode.react": "^0.5.1",
     "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react-dom": "^0.14.0",
+    "watchify": "^3.4.0"
   }
 }
