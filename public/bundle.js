@@ -14,7 +14,8 @@ var ReactDOM = require('react-dom');
 
 var State = {
     START_SCREEN: "start_screen",
-    START_GAME: "start_game"
+    START_GAME: "start_game",
+    PLAY: "play"
 };
 
 var App = (function (_React$Component) {
@@ -25,15 +26,20 @@ var App = (function (_React$Component) {
 
         _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
         this.state = {
-            state: State.START_SCREEN,
             gameId: null,
             users: []
         };
+        if (window.location.pathname.indexOf("play") > -1) {
+            this.state.state = State.PLAY;
+            this.state.gameId = parseInt(window.location.pathname.split("/").reverse()[0]);
+        } else {
+            this.state.state = State.START_SCREEN;
+        }
     }
 
     _createClass(App, [{
-        key: 'startGame',
-        value: function startGame() {
+        key: 'hostGame',
+        value: function hostGame() {
             var _this = this;
 
             this.setState({
@@ -53,7 +59,7 @@ var App = (function (_React$Component) {
                 case State.START_GAME:
                     return React.createElement(StartGame, null);
                 default:
-                    return React.createElement(StartScreen, { startGame: this.startGame.bind(this) });
+                    return React.createElement(StartScreen, { hostGame: this.hostGame.bind(this) });
             }
         }
     }]);
@@ -96,7 +102,7 @@ var StartScreen = (function (_React$Component3) {
     _createClass(StartScreen, [{
         key: 'hostGame',
         value: function hostGame() {
-            this.props.startGame();
+            this.props.hostGame();
         }
     }, {
         key: 'render',

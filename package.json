@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/mhils/wcgw#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
   },
   "devDependencies": {
     "babelify": "^6.3.0",
