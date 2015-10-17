@@ -530,7 +530,7 @@ var StartGame = (function (_React$Component) {
                 return _react2["default"].createElement(
                     "div",
                     null,
-                    "..."
+                    _react2["default"].createElement("i", { className: "fa fa-spinner fa-pulse fa-4x" })
                 );
             }
             return _react2["default"].createElement(
