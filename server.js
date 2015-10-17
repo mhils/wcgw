@@ -101,12 +101,14 @@ class User {
         this.username = username;
         this.socket = socket;
         this.score = 0;
+        this.id = Math.random();
     }
 
     toJSON() {
         return {
             username: this.username,
-            score: this.score
+            score: this.score,
+            id: this.id
         };
     }
 }
