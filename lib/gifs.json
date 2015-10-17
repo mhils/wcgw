@@ -9,7 +9,7 @@
       "length": 10000,
       "url": "/gifs/horse_answer.mp4"
     },
-    "answers": [
+    "choices": [
       "This is right",
       "such wong",
       "even more wong",
@@ -27,7 +27,7 @@
       "length": 8000,
       "url": "/gifs/bus_answer.mp4"
     },
-    "answers": [
+    "choices": [
       "This is right",
       "such wong",
       "even more wong",
@@ -41,11 +41,11 @@
       "length": 4000,
       "url": "/gifs/ponies_question.mp4"
     },
-    "full": {
+    "answer": {
       "length": 20000,
-      "url": "/gifs/ponies_full.mp4"
+      "url": "/gifs/ponies_answer.mp4"
     },
-    "answers": [
+    "choices": [
       "This is right",
       "such wong",
       "even more wong",
