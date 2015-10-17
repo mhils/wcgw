@@ -1,0 +1,2 @@
+# wcgw
+https://whatcouldgowrong.party
