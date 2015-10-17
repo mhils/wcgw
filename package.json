@@ -1,0 +1,32 @@
+{
+  "name": "wcgw",
+  "version": "1.0.0",
+  "description": "https://whatcouldgowrong.party",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "concurrent \"nodemon server.js\" \"watchify -t babelify lib/main.js -o public/bundle.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhils/wcgw.git"
+  },
+  "author": "Franziska Carstens, Maximilian Hils",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mhils/wcgw/issues"
+  },
+  "homepage": "https://github.com/mhils/wcgw#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
+    "concurrently": "^0.1.1",
+    "nodemon": "^1.7.1",
+    "watchify": "^3.4.0"
+  }
+}
