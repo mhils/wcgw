@@ -189,8 +189,8 @@ var _react = require("react");
 var _react2 = _interopRequireDefault(_react);
 
 var colors = ["primary", "success", "info", "warning", "danger"];
-var firstNames = ["Sheldon", "Paris", "Horst", "Heidi", "Kim"];
-var lastNames = ["Cooper", "Hofstadter", "Kardashian", "Klum", "Hilton"];
+var firstNames = ["Sheldon", "Paris", "Horst", "Heidi", "Kim", "Darth", "Yoda"];
+var lastNames = ["Cooper", "Hofstadter", "Kardashian", "Klum", "Hilton", "Vader"];
 
 var JoinGame = (function (_React$Component) {
     _inherits(JoinGame, _React$Component);
@@ -307,16 +307,31 @@ var LandingPage = (function (_React$Component) {
         value: function render() {
             return _react2["default"].createElement(
                 "div",
-                null,
+                { className: "landing" },
                 _react2["default"].createElement(
                     "h1",
                     null,
                     "What Could Go Wrong?"
                 ),
                 _react2["default"].createElement(
+                    "h2",
+                    null,
+                    "Can you guess the fail?"
+                ),
+                _react2["default"].createElement(
                     "button",
-                    { className: "btn btn-primary", onClick: this.hostGame.bind(this) },
-                    "Host Game"
+                    { className: "btn btn-lg btn-primary", onClick: this.hostGame.bind(this) },
+                    _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
+                    " ",
+                    _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
+                    " ",
+                    _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
+                    "  Create Game  ",
+                    _react2["default"].createElement("i", { className: "fa fa-arrow-left" }),
+                    " ",
+                    _react2["default"].createElement("i", { className: "fa fa-arrow-left" }),
+                    " ",
+                    _react2["default"].createElement("i", { className: "fa fa-arrow-left" })
                 )
             );
         }
@@ -356,16 +371,33 @@ var _scoreboardJs = require("./scoreboard.js");
 
 var _scoreboardJs2 = _interopRequireDefault(_scoreboardJs);
 
+var colors = ["primary", "success", "info", "warning", "danger"];
+
 var Lobby = (function (_React$Component) {
     _inherits(Lobby, _React$Component);
 
-    function Lobby() {
+    function Lobby(props) {
+        var _this = this;
+
         _classCallCheck(this, Lobby);
 
-        _get(Object.getPrototypeOf(Lobby.prototype), "constructor", this).apply(this, arguments);
+        _get(Object.getPrototypeOf(Lobby.prototype), "constructor", this).call(this, props);
+        this.state = { color: "primary" };
+        this.updateColor = setInterval(function () {
+            var color = _this.state.color;
+            while (color === _this.state.color) {
+                color = "btn-" + colors[Math.floor(Math.random() * colors.length)];
+            }
+            _this.setState({ color: color });
+        }, 250);
     }
 
     _createClass(Lobby, [{
+        key: "joinGame",
+        value: function joinGame() {
+            clearInterval(this.updateColor);
+        }
+    }, {
         key: "render",
         value: function render() {
             if (!this.props.game) {
@@ -379,24 +411,41 @@ var Lobby = (function (_React$Component) {
             var url = origin + "/play/" + this.props.game.id;
             return _react2["default"].createElement(
                 "div",
-                null,
+                { className: "lobby" },
                 _react2["default"].createElement(
-                    "h1",
+                    "main",
                     null,
-                    "show barcode"
+                    _react2["default"].createElement(
+                        "h1",
+                        { className: this.state.color.replace("btn-", "text-") },
+                        "Get your friends together!"
+                    ),
+                    _react2["default"].createElement(_qrcodeReact2["default"], { value: url, size: 512 }),
+                    _react2["default"].createElement(
+                        "h3",
+                        null,
+                        "Alternatively, share this link: "
+                    ),
+                    _react2["default"].createElement(
+                        "p",
+                        null,
+                        _react2["default"].createElement(
+                            "a",
+                            { href: url },
+                            url
+                        )
+                    ),
+                    _react2["default"].createElement(
+                        "button",
+                        { className: "btn btn-lg btn-success", onClick: this.props.startGame },
+                        "Start Game"
+                    )
                 ),
-                _react2["default"].createElement(_qrcodeReact2["default"], { value: url }),
                 _react2["default"].createElement(
-                    "a",
-                    { href: url },
-                    url
-                ),
-                _react2["default"].createElement(
-                    "button",
-                    { onClick: this.props.startGame },
-                    "Start Game"
-                ),
-                _react2["default"].createElement(_scoreboardJs2["default"], { users: this.props.game.users })
+                    "aside",
+                    null,
+                    _react2["default"].createElement(_scoreboardJs2["default"], { users: this.props.game.users })
+                )
             );
         }
     }]);
@@ -778,7 +827,11 @@ var ScoreBoard = (function (_React$Component2) {
             return _react2["default"].createElement(
                 "div",
                 null,
-                "Users: ",
+                _react2["default"].createElement(
+                    "h4",
+                    null,
+                    "Scores"
+                ),
                 userNodes
             );
         }

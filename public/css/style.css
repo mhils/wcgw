@@ -57,3 +57,47 @@ html, body, #app {
     height: 15%;
     /*border-radius: 0;*/
 }
+
+.landing {
+    text-align: center;
+}
+
+.landing h1 {
+    font-style: italic;
+    font-size: 5em;
+    padding-top: 200px;
+}
+.landing button {
+    margin: 30px;
+}
+.landing button:hover {
+    transform: scale(1.2);
+    transition: all 100ms ease-in-out;
+}
+
+.lobby {
+    text-align: center;
+}
+.lobby h1 {
+    font-size: 4em;
+    font-style: italic;
+}
+.lobby .canvas {
+    width: 100%;
+}
+.lobby a {
+    font-size: 2.5em;
+    font-family: 'Passion One', sans-serif;
+}
+
+.lobby {
+    display: flex;
+    flex-direction: row;
+}
+.lobby main {
+    flex: 1;
+}
+.lobby aside {
+    flex: none;
+    width: 250px;
+}
