@@ -136,7 +136,7 @@ function evaluate(game) {
     game.users[0].score++;
     game.setState(GameState.SHOW_ANSWER);
     if (!game.mode.isFinished(game)) {
-        setTimeout(() => showQuestion(game), game.gif.answer.length + 4 * 1000);
+        setTimeout(() => showQuestion(game), game.gif.full.length + 4 * 1000);
     }
 }
 
