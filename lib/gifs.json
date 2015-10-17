@@ -1,19 +1,36 @@
 [
-    {
-        "title": "GIF Title",
-        "question": {
-            "length": 1000,
-            "url": ""
-        },
-        "full": {
-            "length": 2000,
-            "url": ""
-        },
-        "answers": {
-            "This is right": true,
-            "such wong": false,
-            "even more wong": false,
-            "worst": false
-        }
+  {
+    "title": "horse",
+    "question": {
+      "length": 4000,
+      "url": "/gifs/horse_question.mp4"
+    },
+    "full": {
+      "length": 10000,
+      "url": "/gifs/horse_full.mp4"
+    },
+    "answers": {
+      "This is right": true,
+      "such wong": false,
+      "even more wong": false,
+      "worst": false
     }
+  },
+  {
+    "title": "bus",
+    "question": {
+      "length": 5000,
+      "url": "/gifs/bus_question.mp4"
+    },
+    "full": {
+      "length": 8000,
+      "url": "/gifs/bus_full.mp4"
+    },
+    "answers": {
+      "This is right": true,
+      "such wong": false,
+      "even more wong": false,
+      "worst": false
+    }
+  }
 ]
