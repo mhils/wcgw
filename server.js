@@ -10,7 +10,7 @@ function nextGameId(){
     return ++gameCount;
 }
 
-app.listen(port, function () {
+server.listen(port, function () {
     console.log(
         'Server listening at http://%s:%s',
         this.address().address,
@@ -36,6 +36,18 @@ class Game {
         this.users = [];
         this.observers = [];
     }
+
+    get all() {
+        return game.users.map((u) => u.socket).concat(game.observers);
+    }
+
+    toJSON() {
+        return {
+            id: this.id,
+            started: this.started,
+            users: this.users.map((u) => u.toJSON())
+        }
+    }
 }
 
 class User {
@@ -46,10 +58,10 @@ class User {
     }
 
     toJSON() {
-        return JSON.stringify({
+        return {
             username: this.username,
             score: this.score
-        })
+        };
     }
 }
 
@@ -62,10 +74,10 @@ const State = {
 
 io.on("connection", function (socket) {
 
-    socket.status = "idle";
+    socket.status = State.IDLE;
 
     function observe(gameId){
-        socket.status = State.OBSERVING;
+
 
         // Game does not exist?
         if (!(gameId in games)) {
@@ -73,9 +85,11 @@ io.on("connection", function (socket) {
         }
         var game = games[gameId];
         game.observers.push(socket);
-        user.socket.emit("game info", game);
+        console.log(game);
+        socket.emit("game info", game.toJSON());
 
         socket.game = game;
+        socket.status = State.OBSERVING;
     }
 
     socket.on("host game", function(){
@@ -96,7 +110,7 @@ io.on("connection", function (socket) {
     });
 
     socket.on('join game', function (gameId, username) {
-        socket.status = State.PLAYING;
+
 
         // Game does not exist?
         if (!(gameId in games)) {
@@ -113,17 +127,18 @@ io.on("connection", function (socket) {
         socket.game = game;
         socket.user = user;
 
-        game.users.forEach((u) => {
+        game.all.forEach((u) => {
             u.socket.emit("user joined", user);
         });
 
+        socket.status = State.PLAYING;
     });
 
     socket.on('disconnect', function () {
         switch(socket.status){
             case State.PLAYING:
                 socket.game.users = socket.game.users.filter((u) => u !== socket.user);
-                game.users.forEach((u) => {
+                game.all.forEach((u) => {
                     u.socket.emit("user left", socket.user);
                 });
                 break;

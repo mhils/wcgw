@@ -13,6 +13,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var State = {
+    OBSERVE: "observe",
     START_SCREEN: "start_screen",
     HOST_GAME: "start_game",
     JOIN: "join"
@@ -22,50 +23,56 @@ var App = (function (_React$Component) {
     _inherits(App, _React$Component);
 
     function App(props) {
+        var _this = this;
+
         _classCallCheck(this, App);
 
         _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
 
-        //var socket = window.io(document.location.protocol + '//' + document.location.host);
+        var socket = io();
 
-        //socket.on("game info", function(){});
+        socket.on("game info", function (game) {
+            _this.setState({ game: game });
+        });
 
         this.state = {
-            //socket: socket,
-            gameId: null,
-            users: []
+            socket: socket,
+            game: null
         };
         if (window.location.pathname.indexOf("play") > -1) {
             this.state.state = State.JOIN;
-            this.state.gameId = parseInt(window.location.pathname.split("/").reverse()[0]);
+            //this.state.gameId = parseInt(window.location.pathname.split("/").reverse()[0]);
         } else {
-            this.state.state = State.START_SCREEN;
-        }
+                this.state.state = State.START_SCREEN;
+            }
     }
 
     _createClass(App, [{
+        key: 'startGame',
+        value: function startGame() {
+            this.state.socket.emit("start game");
+            this.setState({
+                state: State.OBSERVE
+            });
+        }
+    }, {
         key: 'hostGame',
         value: function hostGame() {
-            var _this = this;
-
+            this.state.socket.emit("host game");
             this.setState({
                 state: State.HOST_GAME
             });
-            window.setTimeout(function () {
-                _this.setState({
-                    gameId: 42,
-                    users: [{ name: "James Bond", score: 3 }, { name: "Jamie Bond", score: 4 }]
-                });
-            }, 1000);
         }
     }, {
         key: 'render',
         value: function render() {
             switch (this.state.state) {
                 case State.HOST_GAME:
-                    return React.createElement(StartGame, { gameId: this.state.gameId, users: this.state.users });
+                    return React.createElement(StartGame, { game: this.state.game, startGame: this.startGame.bind(this) });
                 case State.JOIN:
                     return React.createElement(JoinGame, null);
+                case State.OBSERVE:
+                    return React.createElement(ObserveGame, { game: this.state.game });
                 default:
                     return React.createElement(StartScreen, { hostGame: this.hostGame.bind(this) });
             }
@@ -75,8 +82,33 @@ var App = (function (_React$Component) {
     return App;
 })(React.Component);
 
-var JoinGame = (function (_React$Component2) {
-    _inherits(JoinGame, _React$Component2);
+var ObserveGame = (function (_React$Component2) {
+    _inherits(ObserveGame, _React$Component2);
+
+    function ObserveGame() {
+        _classCallCheck(this, ObserveGame);
+
+        _get(Object.getPrototypeOf(ObserveGame.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(ObserveGame, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'div',
+                null,
+                'such gif',
+                React.createElement(UserList, { users: this.props.game.users })
+            );
+        }
+    }]);
+
+    return ObserveGame;
+})(React.Component);
+
+var JoinGame = (function (_React$Component3) {
+    _inherits(JoinGame, _React$Component3);
 
     function JoinGame() {
         _classCallCheck(this, JoinGame);
@@ -98,8 +130,8 @@ var JoinGame = (function (_React$Component2) {
     return JoinGame;
 })(React.Component);
 
-var StartGame = (function (_React$Component3) {
-    _inherits(StartGame, _React$Component3);
+var StartGame = (function (_React$Component4) {
+    _inherits(StartGame, _React$Component4);
 
     function StartGame() {
         _classCallCheck(this, StartGame);
@@ -110,6 +142,13 @@ var StartGame = (function (_React$Component3) {
     _createClass(StartGame, [{
         key: 'render',
         value: function render() {
+            if (!this.props.game) {
+                return React.createElement(
+                    'div',
+                    null,
+                    '...'
+                );
+            }
             return React.createElement(
                 'div',
                 null,
@@ -120,11 +159,16 @@ var StartGame = (function (_React$Component3) {
                 ),
                 React.createElement(
                     'a',
-                    { href: "/play/" + this.props.gameId },
+                    { href: "/play/" + this.props.game.id },
                     'whatcouldgowrong.party/play/',
-                    this.props.gameId
+                    this.props.game.id
                 ),
-                React.createElement(UserList, { users: this.props.users })
+                React.createElement(
+                    'button',
+                    { onClick: this.props.startGame },
+                    'Start Game'
+                ),
+                React.createElement(UserList, { users: this.props.game.users })
             );
         }
     }]);
@@ -132,8 +176,8 @@ var StartGame = (function (_React$Component3) {
     return StartGame;
 })(React.Component);
 
-var User = (function (_React$Component4) {
-    _inherits(User, _React$Component4);
+var User = (function (_React$Component5) {
+    _inherits(User, _React$Component5);
 
     function User() {
         _classCallCheck(this, User);
@@ -159,8 +203,8 @@ var User = (function (_React$Component4) {
     return User;
 })(React.Component);
 
-var UserList = (function (_React$Component5) {
-    _inherits(UserList, _React$Component5);
+var UserList = (function (_React$Component6) {
+    _inherits(UserList, _React$Component6);
 
     function UserList() {
         _classCallCheck(this, UserList);
@@ -188,8 +232,8 @@ var UserList = (function (_React$Component5) {
     return UserList;
 })(React.Component);
 
-var StartScreen = (function (_React$Component6) {
-    _inherits(StartScreen, _React$Component6);
+var StartScreen = (function (_React$Component7) {
+    _inherits(StartScreen, _React$Component7);
 
     function StartScreen() {
         _classCallCheck(this, StartScreen);
