@@ -5,6 +5,8 @@ var server = require('http').createServer(app);
 var io = require("socket.io")(server);
 var port = process.env.PORT || 3000;
 var gifs = require("./lib/gifs.json");
+var common = require("./lib/common.js");
+
 
 var gameCount = 0;
 function nextGameId() {
@@ -65,6 +67,7 @@ class Game {
         this.state = GameState.LOBBY;
         this.users = [];
         this.observers = [];
+        this.history = [];
         this.mode = mode;
         this.gif = undefined;
     }
@@ -126,8 +129,17 @@ function startGame(game) {
         showQuestion(game);
     }
 }
+
 function showQuestion(game) {
-    game.gif = gifs[Math.floor(Math.random() * gifs.length)];
+    // pick random gif that hasn't been played yet.
+    do {
+        game.gif = gifs[Math.floor(Math.random() * gifs.length)];
+    } while(game.history.indexOf(game.gif) > -1);
+    if(game.history.length == gifs.length){
+        game.history.unshift();
+    }
+    game.history.push(game.gif);
+
     game.setState(GameState.SHOW_QUESTION);
     setTimeout(() => showChoices(game), game.gif.question.length);
 }
@@ -135,7 +147,7 @@ function showChoices(game) {
     game.users.forEach((u) => { u.choice = null; });
     game.setState(GameState.SHOW_CHOICES);
 
-    var wait = Math.max(game.gif.question.length*2 + 1000, 10 * 1000);
+    var wait = common.choiceDuration(game.gif.question.length);
     setTimeout(() => evaluate(game), wait);
 }
 function evaluate(game) {
@@ -148,12 +160,12 @@ function evaluate(game) {
     setTimeout(() => {
         correct.forEach((u) => u.score++);
         game.emitUpdate();
-    }, game.gif.answers.length);
+    }, game.gif.answer.length);
 
     // show answer
     game.setState(GameState.SHOW_ANSWER);
     if (!game.mode.isFinished(game)) {
-        setTimeout(() => showQuestion(game), game.gif.answers.length + 4 * 1000);
+        setTimeout(() => showQuestion(game), game.gif.answer.length + 4 * 1000);
     }
 }
 

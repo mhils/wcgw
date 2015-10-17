@@ -21,8 +21,7 @@ html, body, #app {
 
 .play h1 {
     margin: 0;
-    height: 9%;
-    padding: 2.5%;
+    padding: 10px 0 5px;
     box-shadow: 0 5px 5px #D2D2D2;
 }
 
@@ -55,6 +54,6 @@ html, body, #app {
 }
 
 .play button {
-    height: 20%;
+    height: 15%;
     /*border-radius: 0;*/
 }
