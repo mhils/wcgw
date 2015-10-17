@@ -5,9 +5,9 @@
       "length": 4000,
       "url": "/gifs/horse_question.mp4"
     },
-    "full": {
+    "answer": {
       "length": 10000,
-      "url": "/gifs/horse_full.mp4"
+      "url": "/gifs/horse_answer.mp4"
     },
     "answers": [
       "This is right",
@@ -23,9 +23,9 @@
       "length": 5000,
       "url": "/gifs/bus_question.mp4"
     },
-    "full": {
+    "answer": {
       "length": 8000,
-      "url": "/gifs/bus_full.mp4"
+      "url": "/gifs/bus_answer.mp4"
     },
     "answers": [
       "This is right",

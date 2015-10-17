@@ -1,0 +1,45 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+h1 {
+    font-family: 'Passion One';
+}
+
+html, body, #app {
+    height: 100%;
+}
+
+.play {
+    height: 100%;
+    padding-top: 12px;
+    text-align: center;
+}
+
+.play h1 {
+    margin: 0;
+    box-shadow: 0 5px 5px #D2D2D2;
+}
+
+.play input {
+    width: 90%;
+    margin: 50px 5% 20px;
+}
+
+.play .fa {
+    padding: 10%;
+}
+
+.play .progress {
+    margin: 5px 0 10px;
+    border-radius: 0;
+}
+
+.play button {
+    height: 20%;
+    /*border-radius: 0;*/
+}

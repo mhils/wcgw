@@ -134,7 +134,9 @@ function showQuestion(game) {
 function showChoices(game) {
     game.users.forEach((u) => { u.choice = null; });
     game.setState(GameState.SHOW_CHOICES);
-    setTimeout(() => evaluate(game), 5 * 1000);
+
+    var wait = Math.max(game.gif.question.length*2 + 1000, 10 * 1000);
+    setTimeout(() => evaluate(game), wait);
 }
 function evaluate(game) {
     // determine winners
@@ -146,12 +148,12 @@ function evaluate(game) {
     setTimeout(() => {
         correct.forEach((u) => u.score++);
         game.emitUpdate();
-    }, game.gif.full.length);
+    }, game.gif.answer.length);
 
     // show answer
     game.setState(GameState.SHOW_ANSWER);
     if (!game.mode.isFinished(game)) {
-        setTimeout(() => showQuestion(game), game.gif.full.length + 4 * 1000);
+        setTimeout(() => showQuestion(game), game.gif.answer.length + 4 * 1000);
     }
 }
 

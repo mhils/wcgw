@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "concurrent \"nodemon server.js\" \"watchify -t babelify lib/main.js -o public/bundle.js\""
+    "develop": "concurrent \"livereload .\" \"nodemon server.js\" \"watchify -t babelify lib/main.js -o public/bundle.js\""
   },
   "repository": {
     "type": "git",
@@ -25,9 +25,10 @@
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "concurrently": "^0.1.1",
+    "livereload": "^0.3.7",
     "nodemon": "^1.7.1",
-    "watchify": "^3.4.0",
     "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react-dom": "^0.14.0",
+    "watchify": "^3.4.0"
   }
 }

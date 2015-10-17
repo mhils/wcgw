@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -27,17 +29,70 @@ var _gameJs = require("./game.js");
 var Gif = (function (_React$Component) {
     _inherits(Gif, _React$Component);
 
-    function Gif() {
+    function Gif(props) {
         _classCallCheck(this, Gif);
 
-        _get(Object.getPrototypeOf(Gif.prototype), "constructor", this).apply(this, arguments);
+        _get(Object.getPrototypeOf(Gif.prototype), "constructor", this).call(this, props);
+        this.state = { repetitions: 1 };
     }
+
+    _createClass(Gif, [{
+        key: "componentWillReceiveProps",
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.url !== this.props.url) {
+                this.setState({ repetitions: 1 });
+            }
+        }
+    }, {
+        key: "onEnded",
+        value: function onEnded(event) {
+            if (this.state.repetitions < this.props.repetitions) {
+                event.target.play();
+                this.setState({ repetitions: this.state.repetitions + 1 });
+            }
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return _react2["default"].createElement("video", { src: this.props.url, autoPlay: true, onEnded: this.onEnded.bind(this) });
+        }
+    }]);
 
     return Gif;
 })(_react2["default"].Component);
 
-var ObserveGame = (function (_React$Component2) {
-    _inherits(ObserveGame, _React$Component2);
+var Choices = (function (_React$Component2) {
+    _inherits(Choices, _React$Component2);
+
+    function Choices() {
+        _classCallCheck(this, Choices);
+
+        _get(Object.getPrototypeOf(Choices.prototype), "constructor", this).apply(this, arguments);
+    }
+
+    _createClass(Choices, [{
+        key: "render",
+        value: function render() {
+            var answers = this.props.answers.map(function (x) {
+                return _react2["default"].createElement(
+                    "li",
+                    { key: x },
+                    x
+                );
+            });
+            return _react2["default"].createElement(
+                "ul",
+                null,
+                answers
+            );
+        }
+    }]);
+
+    return Choices;
+})(_react2["default"].Component);
+
+var ObserveGame = (function (_React$Component3) {
+    _inherits(ObserveGame, _React$Component3);
 
     function ObserveGame() {
         _classCallCheck(this, ObserveGame);
@@ -59,31 +114,26 @@ var ObserveGame = (function (_React$Component2) {
 
             var gif;
             if (game.state === _gameJs.GameState.SHOW_QUESTION || game.state === _gameJs.GameState.SHOW_CHOICES) {
-                gif = _react2["default"].createElement(
-                    "div",
-                    null,
-                    "question"
-                );
+                gif = _react2["default"].createElement(Gif, _extends({}, game.gif.question, { repetitions: 3 }));
             } else if (game.state === _gameJs.GameState.SHOW_ANSWER) {
-                gif = _react2["default"].createElement(
-                    "div",
-                    null,
-                    "answer"
-                );
+                gif = _react2["default"].createElement(Gif, _extends({}, game.gif.answer, { repetitions: 1 }));
             }
 
-            var choices = _react2["default"].createElement(
-                "div",
-                null,
-                "A,B,C,D"
-            );
+            var answers;
+            if (game.state !== _gameJs.GameState.SHOW_QUESTION) {
+                answers = _react2["default"].createElement(Choices, { answers: game.gif.answers });
+            }
 
             return _react2["default"].createElement(
                 "div",
                 null,
+                _react2["default"].createElement(
+                    "h1",
+                    null,
+                    game.gif.title
+                ),
                 gif,
-                choices,
-                "such gif",
+                answers,
                 _react2["default"].createElement(_scoreboardJs2["default"], { users: this.props.game.users })
             );
         }
@@ -129,16 +179,28 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var colors = ["primary", "success", "info", "warning", "danger"];
+
 var JoinGame = (function (_React$Component) {
     _inherits(JoinGame, _React$Component);
 
     function JoinGame(props) {
+        var _this = this;
+
         _classCallCheck(this, JoinGame);
 
         _get(Object.getPrototypeOf(JoinGame.prototype), "constructor", this).call(this, props);
         this.state = {
-            name: "John Doe"
+            name: "John Doe",
+            color: "btn-success"
         };
+        setInterval(function () {
+            var color = _this.state.color;
+            while (color === _this.state.color) {
+                color = "btn-" + colors[Math.floor(Math.random() * colors.length)];
+            }
+            _this.setState({ color: color });
+        }, 250);
     }
 
     _createClass(JoinGame, [{
@@ -156,12 +218,26 @@ var JoinGame = (function (_React$Component) {
         value: function render() {
             return _react2["default"].createElement(
                 "div",
-                null,
-                _react2["default"].createElement("input", { type: "text", value: this.state.name, onChange: this.handleChange.bind(this) }),
+                { className: "play" },
                 _react2["default"].createElement(
-                    "button",
-                    { onClick: this.joinGame.bind(this) },
-                    "Join Game"
+                    "h1",
+                    null,
+                    "WCGW?"
+                ),
+                _react2["default"].createElement(
+                    "p",
+                    null,
+                    _react2["default"].createElement("input", { type: "text",
+                        className: "form-control",
+                        value: this.state.name,
+                        placeholder: "Name",
+                        onChange: this.handleChange.bind(this) }),
+                    _react2["default"].createElement(
+                        "button",
+                        { className: "join btn btn-lg " + this.state.color,
+                            onClick: this.joinGame.bind(this) },
+                        "Join Game"
+                    )
                 )
             );
         }
@@ -220,7 +296,7 @@ var LandingPage = (function (_React$Component) {
                 ),
                 _react2["default"].createElement(
                     "button",
-                    { onClick: this.hostGame.bind(this) },
+                    { className: "btn btn-primary", onClick: this.hostGame.bind(this) },
                     "Host Game"
                 )
             );
@@ -500,52 +576,76 @@ var PlayGame = (function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             var game = this.props.game;
+            var contents;
+
             if (!game || game.state === _gameJs.GameState.LOBBY) {
-                return _react2["default"].createElement(
+                var playerCount = null;
+                if (game) {
+                    playerCount = _react2["default"].createElement(
+                        "p",
+                        null,
+                        game.users.length,
+                        " Players"
+                    );
+                }
+                contents = _react2["default"].createElement(
                     "div",
                     null,
-                    _react2["default"].createElement("i", { className: "fa fa-spinner fa-pulse fa-4x" })
+                    _react2["default"].createElement(
+                        "p",
+                        null,
+                        _react2["default"].createElement("i", { className: "fa fa-spinner fa-pulse fa-4x" })
+                    ),
+                    _react2["default"].createElement(
+                        "h4",
+                        null,
+                        "Waiting for the game to start..."
+                    ),
+                    playerCount
                 );
-            }
-            if (game.state === "show choices") {
-                return _react2["default"].createElement(
+            } else if (game.state === "show choices") {
+                var btnLabels = { 0: "A", 1: "B", 2: "C", 3: "D" };
+                var buttons = [0, 1, 2, 3].map(function (i) {
+                    var cls = "btn btn-block btn-lg";
+                    if (i === _this2.state.choice) {
+                        cls += " btn-success";
+                    } else {
+                        cls += " btn-default";
+                    }
+                    return _react2["default"].createElement(
+                        "button",
+                        {
+                            key: i,
+                            onClick: _this2.submitChoice.bind(_this2, i),
+                            className: cls },
+                        btnLabels[i]
+                    );
+                });
+
+                var progressbarStyle = { width: "100%" };
+                var progressbar = _react2["default"].createElement(
                     "div",
-                    null,
-                    _react2["default"].createElement(
-                        "button",
-                        { onClick: this.submitChoice.bind(this, 0) },
-                        "A"
-                    ),
-                    _react2["default"].createElement(
-                        "button",
-                        { onClick: this.submitChoice.bind(this, 1) },
-                        "B"
-                    ),
-                    _react2["default"].createElement(
-                        "button",
-                        { onClick: this.submitChoice.bind(this, 2) },
-                        "C"
-                    ),
-                    _react2["default"].createElement(
-                        "button",
-                        { onClick: this.submitChoice.bind(this, 3) },
-                        "D"
-                    )
+                    { className: "progress" },
+                    _react2["default"].createElement("div", { className: "progress-bar progress-bar-success", role: "progressbar", style: progressbarStyle })
                 );
-            } else if (game.state === "show answer") {
-                return _react2["default"].createElement(
-                    "div",
-                    null,
-                    _react2["default"].createElement("i", { className: "fa fa-youtube-play fa-4x" })
-                );
+
+                contents = [progressbar, buttons];
             } else {
-                return _react2["default"].createElement(
-                    "div",
-                    null,
-                    _react2["default"].createElement("i", { className: "fa fa-youtube-play fa-4x" })
-                );
+                contents = _react2["default"].createElement("i", { className: "fa fa-youtube-play fa-4x" });
             }
+            return _react2["default"].createElement(
+                "div",
+                { className: "play" },
+                _react2["default"].createElement(
+                    "h1",
+                    null,
+                    "WCGW?"
+                ),
+                contents
+            );
         }
     }]);
 
