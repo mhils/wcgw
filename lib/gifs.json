@@ -9,12 +9,13 @@
       "length": 10000,
       "url": "/gifs/horse_full.mp4"
     },
-    "answers": {
-      "This is right": true,
-      "such wong": false,
-      "even more wong": false,
-      "worst": false
-    }
+    "answers": [
+      "This is right",
+      "such wong",
+      "even more wong",
+      "worst"
+    ],
+    "solution": 1
   },
   {
     "title": "bus",
@@ -26,11 +27,12 @@
       "length": 8000,
       "url": "/gifs/bus_full.mp4"
     },
-    "answers": {
-      "This is right": true,
-      "such wong": false,
-      "even more wong": false,
-      "worst": false
-    }
+    "answers": [
+      "This is right",
+      "such wong",
+      "even more wong",
+      "worst"
+    ],
+    "solution": 1
   }
 ]

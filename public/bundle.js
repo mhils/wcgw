@@ -484,16 +484,16 @@ var PlayGame = (function (_React$Component) {
     _createClass(PlayGame, [{
         key: "componentWillReceiveProps",
         value: function componentWillReceiveProps(nextProps) {
-            if (nextProps.game.state !== this.props.game.state) {
+            if (!this.props.game || nextProps.game.state !== this.props.game.state) {
                 this.setState({ choice: null });
             }
         }
     }, {
-        key: "onAnswerButton",
-        value: function onAnswerButton(choice) {
+        key: "submitChoice",
+        value: function submitChoice(choice) {
             var _this = this;
 
-            this.submitChoice(choice, function () {
+            this.props.submitChoice(choice, function () {
                 _this.setState({ choice: choice });
             });
         }
@@ -514,22 +514,22 @@ var PlayGame = (function (_React$Component) {
                     null,
                     _react2["default"].createElement(
                         "button",
-                        { onClick: this.onAnswerButton.bind(this, "a") },
+                        { onClick: this.submitChoice.bind(this, 0) },
                         "A"
                     ),
                     _react2["default"].createElement(
                         "button",
-                        { onClick: this.onAnswerButton.bind(this, "b") },
+                        { onClick: this.submitChoice.bind(this, 1) },
                         "B"
                     ),
                     _react2["default"].createElement(
                         "button",
-                        { onClick: this.onAnswerButton.bind(this, "c") },
+                        { onClick: this.submitChoice.bind(this, 2) },
                         "C"
                     ),
                     _react2["default"].createElement(
                         "button",
-                        { onClick: this.onAnswerButton.bind(this, "d") },
+                        { onClick: this.submitChoice.bind(this, 3) },
                         "D"
                     )
                 );

@@ -138,8 +138,9 @@ function showChoices(game) {
 }
 function evaluate(game) {
     // determine winners
+    console.log(game.gif, game.users);
     var correct = game.users.filter((u) => {
-        return game.gif.answers[u.choice] === true;
+        return game.gif.solution === u.choice;
     });
     // update scores
     setTimeout(() => {
