@@ -71,7 +71,7 @@ class Game {
 
     setState(state){
         this.state = state;
-        this.emitUpdate(state)
+        this.emitUpdate();
     }
 
     get all() {
@@ -80,6 +80,7 @@ class Game {
 
 
     emitUpdate(eventName) {
+        console.log("emitUpdate", this.toJSON());
         this.all.forEach((u) => {
             u.emit(eventName || "game update", this.toJSON());
         });
@@ -88,8 +89,9 @@ class Game {
     toJSON() {
         return {
             id: this.id,
-            started: this.started,
-            users: this.users.map((u) => u.toJSON())
+            state: this.state,
+            users: this.users.map((u) => u.toJSON()),
+            gif: this.gif
         }
     }
 }
@@ -116,6 +118,7 @@ const State = {
 };
 
 function startGame(game) {
+    console.log("startGame");
     if (game.state === GameState.LOBBY) {
         showQuestion(game);
     }
@@ -127,12 +130,12 @@ function showQuestion(game) {
 }
 function showChoices(game) {
     game.setState(GameState.SHOW_CHOICES);
-    setTimeout(() => evaluate.bind(game), 20 * 1000);
+    setTimeout(() => evaluate(game), 5 * 1000);
 }
 function evaluate(game) {
     game.users[0].score++;
     game.setState(GameState.SHOW_ANSWER);
-    if (!game.isFinished()) {
+    if (!game.mode.isFinished(game)) {
         setTimeout(() => showQuestion(game), game.gif.answer.length + 4 * 1000);
     }
 }
@@ -150,7 +153,6 @@ io.on("connection", function (socket) {
         }
         var game = games[gameId];
         game.observers.push(socket);
-        console.log(game);
         socket.emit("game update", game.toJSON());
 
         socket.game = game;

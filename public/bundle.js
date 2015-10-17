@@ -388,6 +388,8 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _gameJs = require("./game.js");
+
 var PlayGame = (function (_React$Component) {
     _inherits(PlayGame, _React$Component);
 
@@ -405,7 +407,8 @@ var PlayGame = (function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            if (!this.props.game || !this.props.game.started) {
+            var game = this.props.game;
+            if (!game || game.state === _gameJs.GameState.LOBBY) {
                 return _react2["default"].createElement(
                     "div",
                     null,
@@ -415,6 +418,7 @@ var PlayGame = (function (_React$Component) {
             return _react2["default"].createElement(
                 "div",
                 null,
+                game.state,
                 _react2["default"].createElement(
                     "button",
                     { onClick: this.onAnswerButton.bind(this, "a") },
@@ -445,7 +449,7 @@ var PlayGame = (function (_React$Component) {
 exports["default"] = PlayGame;
 module.exports = exports["default"];
 
-},{"react":177}],8:[function(require,module,exports){
+},{"./game.js":2,"react":177}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", {
     value: true
