@@ -218,11 +218,11 @@ var App = (function (_React$Component) {
                 case State.HOST_GAME:
                     return React.createElement(_startJs2['default'], { game: this.state.game, startGame: this.startGame.bind(this) });
                 case State.JOIN:
-                    return React.createElement(_joinJs2['default'], null);
+                    return React.createElement(_playJs2['default'], { game: this.state.game });
                 case State.OBSERVE:
                     return React.createElement(_observeJs2['default'], { game: this.state.game });
                 case State.PLAY:
-                    return React.createElement(_playJs2['default'], null);
+                    return React.createElement(_playJs2['default'], { game: this.state.game });
                 default:
                     return React.createElement(_landingpageJs2['default'], { hostGame: this.hostGame.bind(this) });
             }
@@ -319,6 +319,13 @@ var PlayGame = (function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
+            if (!this.props.game || !this.props.game.started) {
+                return React.createElement(
+                    "div",
+                    null,
+                    React.createElement("i", { className: "fa fa-spinner fa-pulse fa-4x" })
+                );
+            }
             return React.createElement(
                 "div",
                 null,
