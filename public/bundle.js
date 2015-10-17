@@ -180,6 +180,8 @@ var _react = require("react");
 var _react2 = _interopRequireDefault(_react);
 
 var colors = ["primary", "success", "info", "warning", "danger"];
+var firstNames = ["Sheldon", "Paris", "Horst", "Heidi", "Kim"];
+var lastNames = ["Cooper", "Hofstadter", "Kardashian", "Klum", "Hilton"];
 
 var JoinGame = (function (_React$Component) {
     _inherits(JoinGame, _React$Component);
@@ -191,7 +193,7 @@ var JoinGame = (function (_React$Component) {
 
         _get(Object.getPrototypeOf(JoinGame.prototype), "constructor", this).call(this, props);
         this.state = {
-            name: "John Doe",
+            name: this.getRandomName(),
             color: "btn-success"
         };
         setInterval(function () {
@@ -212,6 +214,13 @@ var JoinGame = (function (_React$Component) {
         key: "joinGame",
         value: function joinGame() {
             this.props.joinGame(this.state.name);
+        }
+    }, {
+        key: "getRandomName",
+        value: function getRandomName() {
+            var fullName = firstNames[Math.floor(Math.random() * firstNames.length)] + " " + lastNames[Math.floor(Math.random() * lastNames.length)];
+
+            return fullName;
         }
     }, {
         key: "render",
