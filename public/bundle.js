@@ -580,12 +580,16 @@ var ProgressBar = (function (_React$Component) {
     _createClass(ProgressBar, [{
         key: "componentDidMount",
         value: function componentDidMount() {
+            var _this = this;
+
             var progressStyle = this.refs.progress.style;
+            progressStyle.transition = "";
             progressStyle.width = "100%";
-            progressStyle.transition = "width " + this.props.total + "ms linear";
             setTimeout(function () {
+                progressStyle.transition = "width " + (_this.props.total - 100) + "ms linear";
                 progressStyle.width = "0%";
-            }, 1);
+                console.log(progressStyle.transition);
+            }, 100);
         }
     }, {
         key: "render",
@@ -623,16 +627,16 @@ var PlayGame = (function (_React$Component2) {
     }, {
         key: "submitChoice",
         value: function submitChoice(choice) {
-            var _this = this;
+            var _this2 = this;
 
             this.props.submitChoice(choice, function () {
-                _this.setState({ choice: choice });
+                _this2.setState({ choice: choice });
             });
         }
     }, {
         key: "render",
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             var game = this.props.game;
             var contents;
@@ -666,7 +670,7 @@ var PlayGame = (function (_React$Component2) {
                 var btnLabels = { 0: "A", 1: "B", 2: "C", 3: "D" };
                 var buttons = [0, 1, 2, 3].map(function (i) {
                     var cls = "btn btn-block btn-lg";
-                    if (i === _this2.state.choice) {
+                    if (i === _this3.state.choice) {
                         cls += " btn-info";
                     } else {
                         cls += " btn-default";
@@ -675,7 +679,7 @@ var PlayGame = (function (_React$Component2) {
                         "button",
                         {
                             key: i,
-                            onClick: _this2.submitChoice.bind(_this2, i),
+                            onClick: _this3.submitChoice.bind(_this3, i),
                             className: cls },
                         btnLabels[i]
                     );

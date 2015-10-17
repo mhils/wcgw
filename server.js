@@ -135,10 +135,10 @@ function showQuestion(game) {
     do {
         game.gif = gifs[Math.floor(Math.random() * gifs.length)];
     } while(game.history.indexOf(game.gif) > -1);
+    game.history.push(game.gif);
     if(game.history.length == gifs.length){
         game.history.unshift();
     }
-    game.history.push(game.gif);
 
     game.setState(GameState.SHOW_QUESTION);
     setTimeout(() => showChoices(game), game.gif.question.length);
