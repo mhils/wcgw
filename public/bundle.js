@@ -508,31 +508,44 @@ var PlayGame = (function (_React$Component) {
                     _react2["default"].createElement("i", { className: "fa fa-spinner fa-pulse fa-4x" })
                 );
             }
-            return _react2["default"].createElement(
-                "div",
-                null,
-                game.state,
-                _react2["default"].createElement(
-                    "button",
-                    { onClick: this.onAnswerButton.bind(this, "a") },
-                    "A"
-                ),
-                _react2["default"].createElement(
-                    "button",
-                    { onClick: this.onAnswerButton.bind(this, "b") },
-                    "B"
-                ),
-                _react2["default"].createElement(
-                    "button",
-                    { onClick: this.onAnswerButton.bind(this, "c") },
-                    "C"
-                ),
-                _react2["default"].createElement(
-                    "button",
-                    { onClick: this.onAnswerButton.bind(this, "d") },
-                    "D"
-                )
-            );
+            if (game.state === "show choices") {
+                return _react2["default"].createElement(
+                    "div",
+                    null,
+                    _react2["default"].createElement(
+                        "button",
+                        { onClick: this.onAnswerButton.bind(this, "a") },
+                        "A"
+                    ),
+                    _react2["default"].createElement(
+                        "button",
+                        { onClick: this.onAnswerButton.bind(this, "b") },
+                        "B"
+                    ),
+                    _react2["default"].createElement(
+                        "button",
+                        { onClick: this.onAnswerButton.bind(this, "c") },
+                        "C"
+                    ),
+                    _react2["default"].createElement(
+                        "button",
+                        { onClick: this.onAnswerButton.bind(this, "d") },
+                        "D"
+                    )
+                );
+            } else if (game.state === "show answer") {
+                return _react2["default"].createElement(
+                    "div",
+                    null,
+                    _react2["default"].createElement("i", { className: "fa fa-youtube-play fa-4x" })
+                );
+            } else {
+                return _react2["default"].createElement(
+                    "div",
+                    null,
+                    _react2["default"].createElement("i", { className: "fa fa-youtube-play fa-4x" })
+                );
+            }
         }
     }]);
 
