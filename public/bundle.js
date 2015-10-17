@@ -14,8 +14,8 @@ var ReactDOM = require('react-dom');
 
 var State = {
     START_SCREEN: "start_screen",
-    START_GAME: "start_game",
-    PLAY: "play"
+    HOST_GAME: "start_game",
+    JOIN: "join"
 };
 
 var App = (function (_React$Component) {
@@ -25,12 +25,18 @@ var App = (function (_React$Component) {
         _classCallCheck(this, App);
 
         _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
+
+        //var socket = window.io(document.location.protocol + '//' + document.location.host);
+
+        //socket.on("game info", function(){});
+
         this.state = {
+            //socket: socket,
             gameId: null,
             users: []
         };
         if (window.location.pathname.indexOf("play") > -1) {
-            this.state.state = State.PLAY;
+            this.state.state = State.JOIN;
             this.state.gameId = parseInt(window.location.pathname.split("/").reverse()[0]);
         } else {
             this.state.state = State.START_SCREEN;
@@ -43,7 +49,7 @@ var App = (function (_React$Component) {
             var _this = this;
 
             this.setState({
-                state: State.START_GAME
+                state: State.HOST_GAME
             });
             window.setInterval(function () {
                 _this.setState({
@@ -56,8 +62,10 @@ var App = (function (_React$Component) {
         key: 'render',
         value: function render() {
             switch (this.state.state) {
-                case State.START_GAME:
+                case State.HOST_GAME:
                     return React.createElement(StartGame, null);
+                case State.JOIN:
+                    return React.createElement(JoinGame, null);
                 default:
                     return React.createElement(StartScreen, { hostGame: this.hostGame.bind(this) });
             }
@@ -67,8 +75,31 @@ var App = (function (_React$Component) {
     return App;
 })(React.Component);
 
-var StartGame = (function (_React$Component2) {
-    _inherits(StartGame, _React$Component2);
+var JoinGame = (function (_React$Component2) {
+    _inherits(JoinGame, _React$Component2);
+
+    function JoinGame() {
+        _classCallCheck(this, JoinGame);
+
+        _get(Object.getPrototypeOf(JoinGame.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(JoinGame, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'h1',
+                null,
+                'join game'
+            );
+        }
+    }]);
+
+    return JoinGame;
+})(React.Component);
+
+var StartGame = (function (_React$Component3) {
+    _inherits(StartGame, _React$Component3);
 
     function StartGame() {
         _classCallCheck(this, StartGame);
@@ -90,8 +121,8 @@ var StartGame = (function (_React$Component2) {
     return StartGame;
 })(React.Component);
 
-var StartScreen = (function (_React$Component3) {
-    _inherits(StartScreen, _React$Component3);
+var StartScreen = (function (_React$Component4) {
+    _inherits(StartScreen, _React$Component4);
 
     function StartScreen() {
         _classCallCheck(this, StartScreen);
