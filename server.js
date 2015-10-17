@@ -6,7 +6,7 @@ var io = require("socket.io")(server);
 var port = process.env.PORT || 3000;
 
 var gameCount = 0;
-function nextGameId(){
+function nextGameId() {
     return ++gameCount;
 }
 
@@ -25,12 +25,15 @@ app.use(express.static(__dirname + '/public'));
 app.get('/play/:id', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
+app.get('/game/:id', function (req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 // Game
 var games = {};
 
 class Game {
-    constructor(){
+    constructor() {
         this.id = nextGameId();
         this.started = false;
         this.users = [];
@@ -38,7 +41,13 @@ class Game {
     }
 
     get all() {
-        return game.users.map((u) => u.socket).concat(game.observers);
+        return this.users.map((u) => u.socket).concat(this.observers);
+    }
+
+    emitUpdate(){
+        this.all.forEach((u) => {
+            u.emit("game update", this.toJSON());
+        });
     }
 
     toJSON() {
@@ -76,7 +85,7 @@ io.on("connection", function (socket) {
 
     socket.status = State.IDLE;
 
-    function observe(gameId){
+    function observe(gameId) {
 
 
         // Game does not exist?
@@ -86,26 +95,26 @@ io.on("connection", function (socket) {
         var game = games[gameId];
         game.observers.push(socket);
         console.log(game);
-        socket.emit("game info", game.toJSON());
+        socket.emit("game update", game.toJSON());
 
         socket.game = game;
         socket.status = State.OBSERVING;
     }
 
-    socket.on("host game", function(){
+    socket.on("host game", function () {
         var game = new Game();
         games[game.id] = game;
         observe(game.id);
     });
 
-    socket.on("start game", function(){
-        if(socket.status !== State.OBSERVING) {
+    socket.on("start game", function () {
+        if (socket.status !== State.OBSERVING) {
             throw new Error();
         }
         //startGame();
     });
 
-    socket.on("observe game", function(gameId){
+    socket.on("observe game", function (gameId) {
         observe(gameId);
     });
 
@@ -118,29 +127,23 @@ io.on("connection", function (socket) {
         }
         var game = games[gameId];
 
-        user.socket.emit("game info", game);
-
         var user = new User(username, socket);
+
         game.users.push(user);
 
         // we store the username in the socket session for this client
         socket.game = game;
         socket.user = user;
 
-        game.all.forEach((u) => {
-            u.socket.emit("user joined", user);
-        });
-
+        game.emitUpdate();
         socket.status = State.PLAYING;
     });
 
     socket.on('disconnect', function () {
-        switch(socket.status){
+        switch (socket.status) {
             case State.PLAYING:
                 socket.game.users = socket.game.users.filter((u) => u !== socket.user);
-                game.all.forEach((u) => {
-                    u.socket.emit("user left", socket.user);
-                });
+                socket.game.emitUpdate();
                 break;
             case State.OBSERVING:
                 socket.game.observers = socket.game.observers.filter((u) => u !== socket);
@@ -153,3 +156,8 @@ io.on("connection", function (socket) {
     });
 
 });
+// FIXME DEBUG
+(function () {
+    var game = new Game();
+    games[game.id] = game;
+})();

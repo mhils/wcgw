@@ -37,7 +37,7 @@ var JoinGame = (function (_React$Component) {
 
         _get(Object.getPrototypeOf(JoinGame.prototype), "constructor", this).call(this, props);
         this.state = {
-            name: ""
+            name: "John Doe"
         };
     }
 
@@ -49,7 +49,7 @@ var JoinGame = (function (_React$Component) {
     }, {
         key: "joinGame",
         value: function joinGame() {
-            console.log(this.state.name);
+            this.props.joinGame(this.state.name);
         }
     }, {
         key: "render",
@@ -198,7 +198,8 @@ var App = (function (_React$Component) {
 
         var socket = io();
 
-        socket.on("game info", function (game) {
+        socket.on("game update", function (game) {
+            console.log("received game info", game);
             _this.setState({ game: game });
         });
 
@@ -208,10 +209,13 @@ var App = (function (_React$Component) {
         };
         if (window.location.pathname.indexOf("play") > -1) {
             this.state.state = State.JOIN;
-            //this.state.gameId = parseInt(window.location.pathname.split("/").reverse()[0]);
+        } else if (window.location.pathname.indexOf("game") > -1) {
+            this.state.state = State.OBSERVE;
+            var gameId = parseInt(window.location.pathname.split("/").reverse()[0]);
+            this.state.socket.emit("observe game", gameId);
         } else {
-                this.state.state = State.START_SCREEN;
-            }
+            this.state.state = State.START_SCREEN;
+        }
     }
 
     _createClass(App, [{
@@ -231,13 +235,23 @@ var App = (function (_React$Component) {
             });
         }
     }, {
+        key: "joinGame",
+        value: function joinGame(username) {
+            var gameId = parseInt(window.location.pathname.split("/").reverse()[0]);
+            console.log("Join Game %s as %s", gameId, username);
+            this.state.socket.emit("join game", gameId, username);
+            this.setState({
+                state: State.PLAY
+            });
+        }
+    }, {
         key: "render",
         value: function render() {
             switch (this.state.state) {
                 case State.HOST_GAME:
                     return _react2["default"].createElement(_startJs2["default"], { game: this.state.game, startGame: this.startGame.bind(this) });
                 case State.JOIN:
-                    return _react2["default"].createElement(_joinJs2["default"], null);
+                    return _react2["default"].createElement(_joinJs2["default"], { joinGame: this.joinGame.bind(this) });
                 case State.OBSERVE:
                     return _react2["default"].createElement(_observeJs2["default"], { game: this.state.game });
                 case State.PLAY:
@@ -291,7 +305,13 @@ var ObserveGame = (function (_React$Component) {
     _createClass(ObserveGame, [{
         key: "render",
         value: function render() {
-
+            if (!this.props.game) {
+                return _react2["default"].createElement(
+                    "div",
+                    null,
+                    "..."
+                );
+            }
             return _react2["default"].createElement(
                 "div",
                 null,
@@ -412,7 +432,7 @@ var User = (function (_React$Component) {
             return _react2["default"].createElement(
                 "div",
                 null,
-                this.props.name,
+                this.props.username,
                 " (",
                 this.props.score,
                 ")"
