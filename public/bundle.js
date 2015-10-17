@@ -25,16 +25,26 @@ var App = (function (_React$Component) {
 
         _get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
         this.state = {
-            state: State.START_SCREEN
+            state: State.START_SCREEN,
+            gameId: null,
+            users: []
         };
     }
 
     _createClass(App, [{
         key: 'startGame',
         value: function startGame() {
+            var _this = this;
+
             this.setState({
                 state: State.START_GAME
             });
+            window.setInterval(function () {
+                _this.setState({
+                    gameId: 42,
+                    users: [{ name: "James Bond", score: 3 }, { name: "Jamie Bond", score: 4 }]
+                });
+            }, 1000);
         }
     }, {
         key: 'render',
@@ -112,7 +122,7 @@ var StartScreen = (function (_React$Component3) {
 })(React.Component);
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    ReactDOM.render(React.createElement(App, null), document.body);
+    ReactDOM.render(React.createElement(App, null), document.getElementById("app"));
 });
 
 },{"react":158,"react-dom":3}],2:[function(require,module,exports){
