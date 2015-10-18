@@ -18,7 +18,7 @@
     "solution": 1
   },
   {
-    "title": "\u2744\u2744\u2744\u2744\u2744\u2744",
+    "title": "\u2744\u2744\u2744 What could go wrong? \u2744\u2744\u2744",
     "question": {
       "length": 5000,
       "url": "/gifs/bus_question.mp4"
@@ -29,8 +29,8 @@
     },
     "choices": [
       "Bus falls into hole",
-      "Officer gets hit by snow",
-      "Who said that the snow is snow?",
+      "Officer gets buried by snow",
+      "Monster appears out of the snow",
       "Snowboarder jumps over bus"
     ],
     "solution": 2
@@ -46,12 +46,12 @@
       "url": "/gifs/bike_answer.mp4"
     },
     "choices": [
-      "This is lame, no crash",
+      "This vid is lame, no crash",
       "First boy crashes",
       "Second boy crashes",
       "Both crash!"
     ],
-    "solution": 3
+    "solution": 2
   },
   {
     "title": "Driving down the street, what could go wrong?",
@@ -83,11 +83,11 @@
     },
     "choices": [
       "Surprise! It's still a track in use",
-      "The guy halts and catches fire",
+      "The guy catches fire",
       "It's the beginning of an alien invasion",
       "The track responds"
     ],
-    "solution": 4
+    "solution": 3
   }
 
 ]

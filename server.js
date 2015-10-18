@@ -76,7 +76,7 @@ class Game {
 
 
     emitUpdate(eventName) {
-        console.log("emitUpdate", this.toJSON());
+        //console.log("emitUpdate", this.toJSON());
         this.all.forEach((u) => {
             u.emit(eventName || "game update", this.toJSON());
         });
