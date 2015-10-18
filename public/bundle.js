@@ -90,6 +90,7 @@ var Choices = (function (_React$Component2) {
 
         _get(Object.getPrototypeOf(Choices.prototype), "constructor", this).call(this, props);
         this.state = { highlight: null };
+        this.componentWillReceiveProps(this.props);
     }
 
     _createClass(Choices, [{
@@ -109,7 +110,6 @@ var Choices = (function (_React$Component2) {
     }, {
         key: "componentWillUnmount",
         value: function componentWillUnmount() {
-            console.log("meh");
             clearInterval(this.highlightChoice);
         }
     }, {
@@ -808,7 +808,6 @@ var ProgressBar = (function (_React$Component) {
             setTimeout(function () {
                 progressStyle.transition = "width " + (_this.props.total - 100) + "ms linear";
                 progressStyle.width = "0%";
-                console.log(progressStyle.transition);
             }, 100);
         }
     }, {
