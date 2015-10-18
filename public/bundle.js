@@ -483,6 +483,11 @@ var Lobby = (function (_React$Component) {
                         )
                     ),
                     _react2["default"].createElement(
+                        "h3",
+                        null,
+                        "Once all players have joined, start the game!"
+                    ),
+                    _react2["default"].createElement(
                         "button",
                         { className: "btn btn-lg btn-success", onClick: this.startGame.bind(this) },
                         "Start Game"
