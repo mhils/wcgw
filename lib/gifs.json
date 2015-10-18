@@ -2,11 +2,11 @@
   {
     "title": "What would the horse do?",
     "question": {
-      "length": 4000,
+      "length": 5000,
       "url": "/gifs/horse_question.mp4"
     },
     "answer": {
-      "length": 10000,
+      "length": 5000,
       "url": "/gifs/horse_answer.mp4"
     },
     "choices": [
@@ -54,7 +54,7 @@
     "solution": 3
   },
   {
-    "title": "Robbery, what could go wrong?",
+    "title": "Driving down the street, what could go wrong?",
     "question": {
       "length": 10000,
       "url": "/gifs/robbery_question.mp4"
@@ -69,6 +69,25 @@
       "Guy saves woman from sheep herd",
       "Beginning of a sex tape"
     ],
-    "solution": 3
+    "solution": 1
+  },
+  {
+    "title": "Just some track works?",
+    "question": {
+      "length": 1000,
+      "url": "/gifs/train_question.mp4"
+    },
+    "answer": {
+      "length": 4000,
+      "url": "/gifs/train_answer.mp4"
+    },
+    "choices": [
+      "Surprise! It's still a track in use",
+      "The guy halts and catches fire",
+      "It's the beginning of an alien invasion",
+      "The track responds"
+    ],
+    "solution": 4
   }
+
 ]
