@@ -65,7 +65,7 @@ html, body, #app {
 .landing h1 {
     font-style: italic;
     font-size: 5em;
-    padding-top: 200px;
+    padding-top: 0;
 }
 .landing button {
     margin: 30px;
@@ -142,4 +142,23 @@ html, body, #app {
 
 .choices label {
     opacity: 0.6;
+}
+
+.landing {
+    background: url("/gifs/teaser.gif");
+    background-size: cover;
+    text-align: center;
+    height: 100%;
+}
+.landing > div {
+    display: inline-block;
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 30px 60px;
+    border-radius: 20px;
+}
+
+.landing ol {
+    text-align: left;
+    font-size: 1.5em;
 }

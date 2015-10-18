@@ -355,29 +355,57 @@ var LandingPage = (function (_React$Component) {
                 "div",
                 { className: "landing" },
                 _react2["default"].createElement(
-                    "h1",
+                    "div",
                     null,
-                    "What Could Go Wrong?"
-                ),
-                _react2["default"].createElement(
-                    "h2",
-                    null,
-                    "Can you guess the fail?"
-                ),
-                _react2["default"].createElement(
-                    "button",
-                    { className: "btn btn-lg btn-primary", onClick: this.hostGame.bind(this) },
-                    _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
-                    " ",
-                    _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
-                    " ",
-                    _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
-                    "  Create Game  ",
-                    _react2["default"].createElement("i", { className: "fa fa-arrow-left" }),
-                    " ",
-                    _react2["default"].createElement("i", { className: "fa fa-arrow-left" }),
-                    " ",
-                    _react2["default"].createElement("i", { className: "fa fa-arrow-left" })
+                    _react2["default"].createElement(
+                        "h1",
+                        null,
+                        "What Could Go Wrong?"
+                    ),
+                    _react2["default"].createElement(
+                        "ol",
+                        null,
+                        _react2["default"].createElement(
+                            "li",
+                            null,
+                            "We show you the beginning of a FAIL."
+                        ),
+                        _react2["default"].createElement(
+                            "li",
+                            null,
+                            "You guess what happens next using your phone."
+                        ),
+                        _react2["default"].createElement(
+                            "li",
+                            null,
+                            "???"
+                        ),
+                        _react2["default"].createElement(
+                            "li",
+                            null,
+                            "Profit!"
+                        )
+                    ),
+                    _react2["default"].createElement(
+                        "h2",
+                        null,
+                        "Can you guess the fails?"
+                    ),
+                    _react2["default"].createElement(
+                        "button",
+                        { className: "btn btn-lg btn-primary", onClick: this.hostGame.bind(this) },
+                        _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
+                        " ",
+                        _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
+                        " ",
+                        _react2["default"].createElement("i", { className: "fa fa-arrow-right" }),
+                        "  Create Game  ",
+                        _react2["default"].createElement("i", { className: "fa fa-arrow-left" }),
+                        " ",
+                        _react2["default"].createElement("i", { className: "fa fa-arrow-left" }),
+                        " ",
+                        _react2["default"].createElement("i", { className: "fa fa-arrow-left" })
+                    )
                 )
             );
         }
