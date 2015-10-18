@@ -189,8 +189,8 @@ var _react = require("react");
 var _react2 = _interopRequireDefault(_react);
 
 var colors = ["primary", "success", "info", "warning", "danger"];
-var firstNames = ["Sheldon", "Paris", "Horst", "Heidi", "Kim"];
-var lastNames = ["Cooper", "Hofstadter", "Kardashian", "Klum", "Hilton"];
+var firstNames = ["Sheldon", "Paris", "Horst", "Heidi", "Kim", "Darth", "Yoda"];
+var lastNames = ["Cooper", "Hofstadter", "Kardashian", "Klum", "Hilton", "Vader"];
 
 var JoinGame = (function (_React$Component) {
     _inherits(JoinGame, _React$Component);
