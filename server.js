@@ -5,8 +5,8 @@ var server = require('http').createServer(app);
 var io = require("socket.io")(server);
 var port = process.env.PORT || 3000;
 var gifs = require("./lib/gifs.json");
-var common = require("./lib/common.js");
-
+var GameState = require("./lib/common.js").GameState;
+var choiceDuration = require("./lib/common.js").choiceDuration;
 
 var gameCount = 0;
 function nextGameId() {
@@ -53,13 +53,6 @@ class InfiniteMode extends Mode {
         return true;
     }
 }
-
-const GameState = {
-    LOBBY: "lobby",
-    SHOW_QUESTION: "show question",
-    SHOW_CHOICES: "show choices",
-    SHOW_ANSWER: "show answer"
-};
 
 class Game {
     constructor(mode) {
@@ -147,7 +140,7 @@ function showChoices(game) {
     game.users.forEach((u) => { u.choice = null; });
     game.setState(GameState.SHOW_CHOICES);
 
-    var wait = common.choiceDuration(game.gif.question.length);
+    var wait = choiceDuration(game.gif.question.length);
     setTimeout(() => evaluate(game), wait);
 }
 function evaluate(game) {

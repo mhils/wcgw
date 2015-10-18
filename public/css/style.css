@@ -137,5 +137,5 @@ html, body, #app {
 }
 
 .choices label {
-    color: gray;
+    opacity: 0.6;
 }
