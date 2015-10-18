@@ -2,11 +2,11 @@
   {
     "title": "What would the horse do?",
     "question": {
-      "length": 5000,
+      "length": 4920,
       "url": "/gifs/horse_question.mp4"
     },
     "answer": {
-      "length": 5000,
+      "length": 5560,
       "url": "/gifs/horse_answer.mp4"
     },
     "choices": [
@@ -24,7 +24,7 @@
       "url": "/gifs/bus_question.mp4"
     },
     "answer": {
-      "length": 8000,
+      "length": 3670,
       "url": "/gifs/bus_answer.mp4"
     },
     "choices": [
@@ -38,11 +38,11 @@
   {
     "title": "Two Boys, One Crash?",
     "question": {
-      "length": 3000,
+      "length": 3300,
       "url": "/gifs/bike_question.mp4"
     },
     "answer": {
-      "length": 3000,
+      "length": 3100,
       "url": "/gifs/bike_answer.mp4"
     },
     "choices": [
@@ -56,11 +56,11 @@
   {
     "title": "Driving down the street, what could go wrong?",
     "question": {
-      "length": 10000,
+      "length": 10010,
       "url": "/gifs/robbery_question.mp4"
     },
     "answer": {
-      "length": 21000,
+      "length": 21570,
       "url": "/gifs/robbery_answer.mp4"
     },
     "choices": [
@@ -78,7 +78,7 @@
       "url": "/gifs/train_question.mp4"
     },
     "answer": {
-      "length": 4000,
+      "length": 4080,
       "url": "/gifs/train_answer.mp4"
     },
     "choices": [
