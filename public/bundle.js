@@ -82,16 +82,25 @@ var Choices = (function (_React$Component2) {
     _createClass(Choices, [{
         key: "render",
         value: function render() {
+            var nums = ["A", "B", "C", "D"];
             var choices = this.props.choices.map(function (x) {
                 return _react2["default"].createElement(
-                    "li",
+                    "div",
                     { key: x },
+                    _react2["default"].createElement(
+                        "label",
+                        null,
+                        "(",
+                        nums.shift(),
+                        ")"
+                    ),
+                    " ",
                     x
                 );
             });
             return _react2["default"].createElement(
-                "ul",
-                null,
+                "div",
+                { className: "choices" },
                 choices
             );
         }
@@ -135,15 +144,23 @@ var ObserveGame = (function (_React$Component3) {
 
             return _react2["default"].createElement(
                 "div",
-                null,
+                { className: "display" },
                 _react2["default"].createElement(
-                    "h1",
+                    "main",
                     null,
-                    game.gif.title
+                    _react2["default"].createElement(
+                        "h1",
+                        null,
+                        game.gif.title
+                    ),
+                    gif,
+                    choices
                 ),
-                gif,
-                choices,
-                _react2["default"].createElement(_scoreboardJs2["default"], { users: this.props.game.users })
+                _react2["default"].createElement(
+                    "aside",
+                    null,
+                    _react2["default"].createElement(_scoreboardJs2["default"], { users: this.props.game.users })
+                )
             );
         }
     }]);
@@ -393,9 +410,10 @@ var Lobby = (function (_React$Component) {
     }
 
     _createClass(Lobby, [{
-        key: "joinGame",
-        value: function joinGame() {
+        key: "startGame",
+        value: function startGame() {
             clearInterval(this.updateColor);
+            this.props.startGame();
         }
     }, {
         key: "render",
@@ -437,7 +455,7 @@ var Lobby = (function (_React$Component) {
                     ),
                     _react2["default"].createElement(
                         "button",
-                        { className: "btn btn-lg btn-success", onClick: this.props.startGame },
+                        { className: "btn btn-lg btn-success", onClick: this.startGame.bind(this) },
                         "Start Game"
                     )
                 ),
@@ -792,9 +810,11 @@ var User = (function (_React$Component) {
     _createClass(User, [{
         key: "render",
         value: function render() {
+            var x = 100 - 100 * this.props.score / this.props.maxScore;
+            var background = "linear-gradient(90deg, white 0%, rgba(255, 38, 118,0.2) " + x + "%, #FF2676 " + x + "%)";
             return _react2["default"].createElement(
                 "div",
-                null,
+                { className: "user", style: { background: background } },
                 this.props.username,
                 " (",
                 this.props.score,
@@ -820,8 +840,8 @@ var ScoreBoard = (function (_React$Component2) {
     _createClass(ScoreBoard, [{
         key: "render",
         value: function render() {
-            console.log("Userinformation ", this.props.users);
-            this.props.users.sort(function (a, b) {
+            var users = this.props.users;
+            users.sort(function (a, b) {
                 if (a.score > b.score) {
                     return -1;
                 }
@@ -830,13 +850,14 @@ var ScoreBoard = (function (_React$Component2) {
                 }
                 return 0;
             });
-            var userNodes = this.props.users.map(function (user) {
-                return _react2["default"].createElement(User, _extends({ key: user.id }, user));
+            var maxScore = Math.max(7, users.length > 0 ? users[0].score : 0);
+            var userNodes = users.map(function (user) {
+                return _react2["default"].createElement(User, _extends({ key: user.id }, user, { maxScore: maxScore }));
             });
 
             return _react2["default"].createElement(
                 "div",
-                null,
+                { className: "scoreboard" },
                 _react2["default"].createElement(
                     "h4",
                     null,

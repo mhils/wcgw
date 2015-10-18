@@ -90,14 +90,52 @@ html, body, #app {
     font-family: 'Passion One', sans-serif;
 }
 
-.lobby {
+.lobby, .display {
     display: flex;
     flex-direction: row;
 }
-.lobby main {
+.lobby main, .display main {
     flex: 1;
 }
-.lobby aside {
+.lobby aside, .display aside {
     flex: none;
     width: 250px;
+}
+
+.scoreboard {
+    text-align: right;
+    padding-right: 10px;
+}
+.scoreboard .user {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.scoreboard .user, .scoreboard h4 {
+    padding: 2px;
+
+}
+.scoreboard h4 {
+    font-family: 'Passion One', sans-serif;
+    font-size: 2em;
+
+}
+
+.display {
+    text-align: center;
+}
+
+.display video {
+    max-height: 500px;
+    width: 100%;
+}
+
+.choices {
+    font-family: 'Passion One', sans-serif;
+    font-size: 3em;
+    text-align: left;
+    display: inline-block;
+}
+
+.choices label {
+    color: gray;
 }

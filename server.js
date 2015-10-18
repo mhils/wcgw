@@ -137,7 +137,7 @@ function showQuestion(game) {
     } while(game.history.indexOf(game.gif) > -1);
     game.history.push(game.gif);
     if(game.history.length == gifs.length){
-        game.history.unshift();
+        game.history.shift();
     }
 
     game.setState(GameState.SHOW_QUESTION);
