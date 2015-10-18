@@ -74,7 +74,7 @@
   {
     "title": "Just some track works?",
     "question": {
-      "length": 1000,
+      "length": 2000,
       "url": "/gifs/train_question.mp4"
     },
     "answer": {
