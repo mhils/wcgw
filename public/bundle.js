@@ -2,7 +2,7 @@
 "use strict";
 
 function choiceDuration(gifLength) {
-    return gifLength * 2 + 6 * 1000;
+    return gifLength * 2 + 5 * 1000;
 }
 
 var GameState = {
